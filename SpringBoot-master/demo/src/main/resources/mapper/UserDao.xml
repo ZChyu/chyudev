@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chyuexample.demo.dao.UserDao">
+    <select id="queryUser" resultType="com.chyuexample.demo.entity.User">
+        SELECT Id,Name,Password,Age,Date
+        FROM user
+        ORDER BY Id
+        DESC
+    </select>
+    <select id="queryUserId" resultType="com.chyuexample.demo.entity.User">
+        SELECT Id,Name,Password,Age
+        FROM user
+        WHERE
+        Id=#{id}
+    </select>
+    <insert id="insertUser" parameterType="map">
+        INSERT  INTO  user(Name,Password,Age,Id,Date)
+         VALUES
+        (#{name},#{password},#{age},#{id},#{date})
+    </insert>
+    <update id="updateUser" parameterType="map" >
+    update user set Name=#{name},Password=#{password},Age=#{age},Date=#{date} where Id=#{id}
+    </update>
+    <delete id="deleteUser">
+        DELETE FROM
+        user WHERE
+        Id=#{id}
+    </delete>
+    <select id="login" parameterType="map" resultType="com.chyuexample.demo.entity.User">
+        SELECT Id,Name,Password,Age
+        FROM user
+        WHERE
+        Password=#{password} AND Name=#{name}
+    </select>
+</mapper>
